@@ -1,1 +1,9 @@
-node_modules
+/node_modules
+
+# Ignore test-related files
+/coverage.data
+/coverage/
+/tests/delta
+
+# Build files
+/dist
