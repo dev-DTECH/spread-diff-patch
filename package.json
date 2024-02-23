@@ -22,6 +22,19 @@
     "url": "https://github.com/dev-DTECH/spread-diff-patch/issues"
   },
   "homepage": "https://github.com/dev-DTECH/spread-diff-patch#readme",
+  "keywords": [
+    "csv",
+    "html",
+    "json",
+    "xlsx",
+    "spreadsheet",
+    "spread",
+    "diff",
+    "delta",
+    "patch",
+    "diff-match-patch",
+    "papaparse"    
+  ],
   "type": "module",
   "dependencies": {
     "@types/papaparse": "^5.3.14",
