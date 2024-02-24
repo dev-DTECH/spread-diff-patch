@@ -3,7 +3,7 @@ import Formatter from "."
 
 type DiffAOA = (string | (string | null)[])[][]
 
-export class CSV extends Formatter<string> {
+export class HTML extends Formatter<string> {
     constructor(actualPatcher = (actual: string) => `[-][${actual}]`, expectedPatcher = (expected: string) => `[+][${expected}]`, separator = " ") {
         super(actualPatcher, expectedPatcher, separator);
         this.actualPatcher = actualPatcher;

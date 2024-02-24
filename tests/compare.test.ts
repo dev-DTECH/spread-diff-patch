@@ -1,8 +1,7 @@
-import { diff, readCSV } from '../src';
-import { CSV } from '../src/formatter/csv';
 import fs from 'fs';
 import crypto from 'crypto';
-
+import { diff, readCSV } from '../src';
+import { CSV } from '../src/formatter/csv';
 
 test('Calculate diffCount', () => {
     const actualFilePath = "tests/data/actual-financial-data.csv"
