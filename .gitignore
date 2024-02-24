@@ -8,3 +8,6 @@
 # Build files
 /dist
 /lib
+
+# Ignore the package-lock.json file
+package-lock.json

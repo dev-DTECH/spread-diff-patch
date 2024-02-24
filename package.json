@@ -38,11 +38,11 @@
   "type": "module",
   "dependencies": {
     "@types/papaparse": "^5.3.14",
-    "papaparse": "^5.4.1",
-    "tsup": "^8.0.2",
-    "typescript-eslint": "^7.0.2"
+    "papaparse": "^5.4.1"
   },
   "devDependencies": {
+    "tsup": "^8.0.2",
+    "typescript-eslint": "^7.0.2",
     "@types/jest": "^29.5.12",
     "@typescript-eslint/eslint-plugin": "^7.0.2",
     "@typescript-eslint/parser": "^7.0.2",
