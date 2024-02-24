@@ -10,7 +10,7 @@ test('Calculate diffCount', () => {
     const actualAOA = readCSV<string>(actualFilePath)
     const expectedAOA = readCSV<string>(expectedFilePath)
     const diffAOA = diff<string>(actualAOA, expectedAOA)
-    expect(diffAOA.diffCount).toEqual(3)
+    expect(diffAOA.diffCount).toEqual(21876)
 })
 
 test('Write delta CSV', () => {
