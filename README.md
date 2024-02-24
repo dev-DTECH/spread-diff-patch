@@ -37,7 +37,7 @@ console.log("Number of differences:", diffAOA.diffCount);
 
 ```typescript
 import { readCSV, diff } from 'spread-diff-patch';
-import { CSV } from 'spread-diff-patch/formatter'; // Assuming CSV formatter is available
+import { CSV } from 'spread-diff-patch/lib/formatter/csv'; // User "csv.js" for JS
 
 const actualFilePath = "tests/data/actual-financial-data.csv";
 const expectedFilePath = "tests/data/expected-financial-data.csv";
