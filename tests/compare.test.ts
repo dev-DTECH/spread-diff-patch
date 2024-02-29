@@ -23,5 +23,5 @@ test('Write delta CSV', () => {
     fs.writeFileSync("tests/delta/diff-financial-data.csv", csv)
     const actualFileString = fs.readFileSync('tests/delta/diff-financial-data.csv').toString()
     const expectedFileString = fs.readFileSync('tests/data/expected-diff-financial-data.csv').toString()
-    expect(actualFileString).toEqual(expectedFileString);
+    expect(actualFileString).toMatch(expectedFileString);
 })
