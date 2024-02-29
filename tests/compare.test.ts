@@ -21,7 +21,9 @@ test('Write delta CSV', () => {
     const csv = diffAOA.format(new CSV())
     fs.mkdirSync("tests/delta", { recursive: true })
     fs.writeFileSync("tests/delta/diff-financial-data.csv", csv)
-    const actualFileString = fs.readFileSync('tests/delta/diff-financial-data.csv').toString()
-    const expectedFileString = fs.readFileSync('tests/data/expected-diff-financial-data.csv').toString()
-    expect(actualFileString).toMatch(expectedFileString);
+    // const actualFileString = fs.readFileSync('tests/delta/diff-financial-data.csv').toString()
+    // const expectedFileString = fs.readFileSync('tests/data/expected-diff-financial-data.csv').toString()
+    const actualDiffAOA = readCSV<string>(actualFilePath)
+    const expectedDiffAOA = readCSV<string>(expectedFilePath)
+    expect(actualDiffAOA).toEqual(expectedDiffAOA);
 })
