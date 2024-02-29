@@ -5,10 +5,10 @@
  * @template T - The type of data in the arrays of arrays.
  */
 export default class Formatter<T> {
-    actualPatcher: (actual: string) => string;
-    expectedPatcher: (expected: string) => string;
-    separator: string;
-
+    // actualPatcher: (actual: string) => string;
+    // expectedPatcher: (expected: string) => string;
+    // separator: string;
+    patch: (actual: string | null, expected: string | null) => string
     /**
      * Creates a new instance of the Formatter class.
      * @param actualPatcher - A function to format the actual value in differences (default is `[-][actual]`).
@@ -16,13 +16,18 @@ export default class Formatter<T> {
      * @param separator - The string used to separate values in the formatted output (default is a single space).
      */
     constructor(
-        actualPatcher: (actual: string) => string = (actual) => `[-][${actual}]`,
-        expectedPatcher: (expected: string) => string = (expected) => `[+][${expected}]`,
-        separator: string = " "
+        patcher = (actual: string | null, expected: string | null) => {
+            let patchedString = ""
+            if (actual)
+                patchedString += `[-][${actual}]`
+            if (actual && expected)
+                patchedString += " "
+            if (expected)
+                patchedString += `[+][${expected}]`
+            return patchedString
+        }
     ) {
-        this.actualPatcher = actualPatcher;
-        this.expectedPatcher = expectedPatcher;
-        this.separator = separator;
+        this.patch = patcher
     }
 
     /**
@@ -34,12 +39,12 @@ export default class Formatter<T> {
         return "Default Formatter";
     }
 
-    /**
-     * Generates a patched string for a single difference in the array of arrays.
-     * @param diff - An array representing a single difference (including null values).
-     * @returns The patched string for the given difference.
-     */
-    patch(diff: (T | null)[]): string {
-        return "Default Patcher";
-    }
+    // /**
+    //  * Generates a patched string for a single difference in the array of arrays.
+    //  * @param diff - An array representing a single difference (including null values).
+    //  * @returns The patched string for the given difference.
+    //  */
+    // patch(diff: (T | null)[]): string {
+    //     return "Default Patcher";
+    // }
 }
