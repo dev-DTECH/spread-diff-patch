@@ -23,7 +23,7 @@ test('Write delta CSV', () => {
     fs.writeFileSync("tests/delta/diff-financial-data.csv", csv)
     // const actualFileString = fs.readFileSync('tests/delta/diff-financial-data.csv').toString()
     // const expectedFileString = fs.readFileSync('tests/data/expected-diff-financial-data.csv').toString()
-    const actualDiffAOA = readCSV<string>(actualFilePath)
-    const expectedDiffAOA = readCSV<string>(expectedFilePath)
+    const actualDiffAOA = readCSV<string>('tests/delta/diff-financial-data.csv')
+    const expectedDiffAOA = readCSV<string>('tests/data/expected-diff-financial-data.csv')
     expect(actualDiffAOA).toEqual(expectedDiffAOA);
 })
