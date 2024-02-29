@@ -1,5 +1,5 @@
 import fs from 'fs';
-import crypto from 'crypto';
+// import crypto from 'crypto';
 import { diff, readCSV } from '../src';
 import { CSV } from '../src/formatter/csv';
 
@@ -19,9 +19,9 @@ test('Write delta CSV', () => {
     const expectedAOA = readCSV<string>(expectedFilePath)
     const diffAOA = diff<string>(actualAOA, expectedAOA)
     const csv = diffAOA.format(new CSV())
+    fs.mkdirSync("tests/delta", { recursive: true })
     fs.writeFileSync("tests/delta/diff-financial-data.csv", csv)
-    const actualFileChecksum = crypto.createHash('sha256').update(fs.readFileSync('tests/delta/diff-financial-data.csv')).digest('hex');
-    const expectedFileChecksum = crypto.createHash('sha256').update(fs.readFileSync('tests/data/expected-diff-financial-data.csv')).digest('hex')
-
-    expect(actualFileChecksum).toEqual(expectedFileChecksum);
+    const actualDiffAOA = readCSV<string>('tests/delta/diff-financial-data.csv')
+    const expectedDiffAOA = readCSV<string>('tests/data/expected-diff-financial-data.csv')
+    expect(actualDiffAOA).toEqual(expectedDiffAOA);
 })
