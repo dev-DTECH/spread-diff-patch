@@ -1,4 +1,5 @@
 import { diff, diffWorkBook, readCSV, readWorkBook } from '../src';
+import testData from './data/test.data.json';
 
 test('Calculate AOA diffCount', () => {
     const actualFilePath = "tests/data/actual-financial-data.csv"
@@ -6,7 +7,7 @@ test('Calculate AOA diffCount', () => {
     const actualAOA = readCSV<string>(actualFilePath)
     const expectedAOA = readCSV<string>(expectedFilePath)
     const diffAOA = diff<string>(actualAOA, expectedAOA)
-    expect(diffAOA.diffCount).toEqual(21876)
+    expect(diffAOA.diffCount).toEqual(testData.diffCountAOA)
 })
 
 test('Calculate WorkBook diffCount', () => {
@@ -15,5 +16,5 @@ test('Calculate WorkBook diffCount', () => {
     const actualWorkBook = readWorkBook(actualFilePath)
     const expectedWorkBook = readWorkBook(expectedFilePath)
     const diff = diffWorkBook(actualWorkBook, expectedWorkBook)
-    expect(diff.diffCount).toEqual(7)
+    expect(diff.diffCount).toEqual(testData.diffCountWB)
 })
