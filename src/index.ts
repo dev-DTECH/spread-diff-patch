@@ -13,6 +13,11 @@ import DiffWorkBook from "./DiffWorkBook";
 export function readCSV<T>(filePath: string): T[][] {
     return Papa.parse<T[]>(fs.readFileSync(filePath, "utf8")).data || [];
 }
+/**
+ * Reads a workbook from the specified file path.
+ * @param filePath - The path to the workbook file.
+ * @returns The parsed workbook object.
+ */
 export function readWorkBook(filePath: string) {
     return xlsx.readFile(filePath)
 }
@@ -51,12 +56,14 @@ export function diff<T>(
     return diffAOA;
 }
 
-// TODO: diff Workbook(eg = xlsx)
-// type DiffWorkBook = {
-//     sheets: { [sheet: string]: DiffAOA<string> }
-//     format: (formatter: WorkbookFormatter) => WorkBook
-// }
-
+/**
+ * Calculates the difference between two workbooks.
+ * @template T - The type of the elements in the workbooks.
+ * @param {WorkBook} actualWorkBook - The actual workbook.
+ * @param {WorkBook} expectedWorkBook - The expected workbook.
+ * @param {(actual: T, expected: T) => boolean} [comparator] - The comparator function to compare elements in the workbooks. Defaults to a function that checks for strict inequality.
+ * @returns {DiffWorkBook<T>} - The diff workbook containing the differences between the two workbooks.
+ */
 export function diffWorkBook<T>(
     actualWorkBook: WorkBook,
     expectedWorkBook: WorkBook,

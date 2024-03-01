@@ -1,8 +1,17 @@
 import { WorkBook, utils } from "xlsx";
 import DiffAOA from "../DIffAOA";
 
+/**
+ * Represents a formatter for a workbook.
+ * @template T - The type of data in the workbook.
+ */
 export class WorkbookFormatter<T> {
     patch: (actual: T | null, expected: T | null) => string
+
+    /**
+     * Creates a new instance of WorkbookFormatter.
+     * @param patcher - A function that generates the patch string for a given actual and expected value.
+     */
     constructor(
         patcher = (actual: T | null, expected: T | null) => {
             let patchedString = ""
@@ -17,6 +26,12 @@ export class WorkbookFormatter<T> {
     ) {
         this.patch = patcher
     }
+
+    /**
+     * Formats the diff sheets of the workbook.
+     * @param diffSheets - An object representing the diff sheets.
+     * @returns The formatted workbook.
+     */
     format(diffSheets: { [sheet: string]: DiffAOA<T> }): WorkBook {
         const diffWorkBook = utils.book_new()
         for (const sheet in diffSheets) {
