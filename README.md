@@ -1,12 +1,30 @@
-# Spread Diff Patch
+# spread-diff-patch
 
 ## Overview
 
-`spread-diff-patch` is an npm package that provides functionality for comparing and formatting differences between two arrays of arrays (AOA). It includes a customizable formatter to generate formatted output based on the identified differences.
+`spread-diff-patch` is a powerful npm package designed to simplify the process of differencing and patching spreadsheet files. It offers comprehensive functionality for comparing various spreadsheet formats, such as CSV and Workbooks (e.g., Excel files), and generating detailed patch files to highlight the differences between them.
+
+### Key Features
+
+- **CSV Comparison:** Seamlessly compare CSV files or similar tabular data formats, making it easy to identify discrepancies between datasets.
+
+- **Workbook Differencing:** Effortlessly analyze differences between Workbook files, enabling efficient tracking of changes in Excel and other spreadsheet formats.
+
+- **Patch Generation:** Generate patch files that succinctly represent the variations between two spreadsheet files, providing a clear overview of modifications made to the data.
+
+- **Multiple Format Support:** Support for a variety of spreadsheet formats, including CSV, Excel, and others, making it versatile for different use cases.
+
+### Use Cases
+
+- **Data Validation:** Quickly validate and verify the accuracy of financial, scientific, or any other tabular data by identifying discrepancies between expected and actual datasets.
+
+- **Change Tracking:** Facilitate efficient change tracking in collaborative spreadsheet environments, aiding teams in understanding modifications made to shared documents.
+
+- **Automated Testing:** Integrate spreadsheet comparison into automated testing workflows, ensuring data consistency across different versions of datasets.
 
 ## Installation
 
-To install the package, use the following npm command:
+To install `spread-diff-patch` using npm, run the following command:
 
 ```bash
 npm install spread-diff-patch
@@ -14,62 +32,41 @@ npm install spread-diff-patch
 
 ## Usage
 
-### Basic Usage
+### Importing the Module
 
 ```typescript
-import { readCSV, diff } from 'spread-diff-patch';
-
-const actualFilePath = "tests/data/actual-financial-data.csv";
-const expectedFilePath = "tests/data/expected-financial-data.csv";
-
-// Read CSV files into arrays of arrays
-const actualAOA = readCSV<string>(actualFilePath);
-const expectedAOA = readCSV<string>(expectedFilePath);
-
-// Calculate differences and obtain a DiffAOA instance
-const diffAOA = diff<string>(actualAOA, expectedAOA);
-
-// Access the count of differences
-console.log("Number of differences:", diffAOA.diffCount);
+import { readCSV, diff, readWorkBook, diffWorkBook } from 'spread-diff-patch';
+import { CSV } from 'spread-diff-patch/lib/formatter/csv';
+import { WorkbookFormatter } from 'spread-diff-patch/lib/formatter/workbook';
 ```
 
-### Write Delta CSV
+## Example Usage
 
 ```typescript
-import { readCSV, diff } from 'spread-diff-patch';
-import { CSV } from 'spread-diff-patch/lib/formatter/csv'; // User "csv.js" for JS
+import { readCSV, diff, readWorkBook, diffWorkBook } from 'spread-diff-patch';
+import { CSV } from 'spread-diff-patch/lib/formatter/csv';
+import { WorkbookFormatter } from 'spread-diff-patch/lib/formatter/workbook';
 
-const actualFilePath = "tests/data/actual-financial-data.csv";
-const expectedFilePath = "tests/data/expected-financial-data.csv";
-
-// Read CSV files into arrays of arrays
-const actualAOA = readCSV<string>(actualFilePath);
-const expectedAOA = readCSV<string>(expectedFilePath);
-
-// Calculate differences and obtain a DiffAOA instance
+// CSV Example
+const actualAOA = readCSV<string>("actual.csv");
+const expectedAOA = readCSV<string>("expected.csv");
 const diffAOA = diff<string>(actualAOA, expectedAOA);
-
-// Format differences as CSV and write to a file
 const csv = diffAOA.format(new CSV());
-fs.writeFileSync("tests/delta/diff-financial-data.csv", csv);
-```
+fs.writeFileSync("diff.csv", csv);
 
-## Formatters
-
-- [x] CSV Formatter
-- [ ] HTML Formatter
-- [ ] JSON Formatter
-
-## Examples
-
-To run the provided examples, execute the following commands:
-
-```bash
-npm test
+// Workbook Example
+const actualWorkBook = readWorkBook("actual.xlsx");
+const expectedWorkBook = readWorkBook("expected.xlsx");
+const diffWB = diffWorkBook(actualWorkBook, expectedWorkBook);
+const workbook = diffWB.format(new WorkbookFormatter());
+fs.writeFileSync("diff.xlsx", workbook);
 ```
 
 ## License
 
-This package is licensed under the [MIT License](LICENSE).
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
----
+## Documentation
+
+- [API Documentation](API.md)
+- [Contributing Guidelines](CONTRIBUTING.md)
