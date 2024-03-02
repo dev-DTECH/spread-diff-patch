@@ -6,6 +6,6 @@ type DiffAOA = (string | (string | null)[])[][]
 export class JSON extends Formatter<string> {
     format(diffAOA: DiffAOA): string {
         // TODO: Implement JSON formatting
-        return "Formatted JSON"
+        throw new Error("Method not implemented.");
     }
 }

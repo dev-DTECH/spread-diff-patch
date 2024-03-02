@@ -6,6 +6,6 @@ type DiffAOA = (string | (string | null)[])[][]
 export class HTML extends Formatter<string> {
     format(diffAOA: DiffAOA): string {
         // TODO: Implement HTML formatting
-        return "Formatted HTML"
+        throw new Error("Method not implemented.");
     }
 }
