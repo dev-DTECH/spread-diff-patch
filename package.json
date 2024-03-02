@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "build": "tsup",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -35,13 +35,13 @@
     "diff-match-patch",
     "papaparse"
   ],
-  "type": "module",
   "dependencies": {
     "@types/papaparse": "^5.3.14",
     "papaparse": "^5.4.1",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
+    "@jest/globals": "^29.7.0",
     "@types/jest": "^29.5.12",
     "@typescript-eslint/eslint-plugin": "^7.0.2",
     "@typescript-eslint/parser": "^7.0.2",
