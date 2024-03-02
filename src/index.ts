@@ -94,7 +94,6 @@ export function diffWorkBook<T>(
             )
             diffWorkBook.diffCount += diffWorkBook.sheets[actualPatchedSheet].diffCount
             const expectedPatchedSheet = sheetPatcher(null,expectedSheets?.[i])
-            console.log({actualPatchedSheet,expectedPatchedSheet})
             diffWorkBook.sheets[expectedPatchedSheet] = diff<T>(
                 [],
                 utils.sheet_to_json(expectedWorkBook.Sheets[expectedSheets?.[i]], { header: 1 }),
