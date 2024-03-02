@@ -59,15 +59,26 @@ export function diff<T>(
 /**
  * Calculates the difference between two workbooks.
  * @template T - The type of the elements in the workbooks.
- * @param {WorkBook} actualWorkBook - The actual workbook.
- * @param {WorkBook} expectedWorkBook - The expected workbook.
- * @param {(actual: T, expected: T) => boolean} [comparator] - The comparator function to compare elements in the workbooks. Defaults to a function that checks for strict inequality.
- * @returns {DiffWorkBook<T>} - The diff workbook containing the differences between the two workbooks.
+ * @param actualWorkBook - The actual workbook.
+ * @param expectedWorkBook - The expected workbook.
+ * @param comparator - The comparator function to compare elements in the workbooks. Defaults to a function that checks for inequality.
+ * @param sheetPatcher - The function to generate a patched string for sheet names. Defaults to a function that generates a string with added and removed sheet names.
+ * @returns - The diff workbook containing the differences between the two workbooks.
  */
 export function diffWorkBook<T>(
     actualWorkBook: WorkBook,
     expectedWorkBook: WorkBook,
-    comparator: (actual: T, expected: T) => boolean = (actual, expected) => actual !== expected
+    comparator: (actual: T, expected: T) => boolean = (actual, expected) => actual !== expected,
+    sheetPatcher = (actual: string | null, expected: string | null) => {
+        let patchedString = ""
+        if (actual)
+            patchedString += `(-)(${actual})`
+        if (actual && expected)
+            patchedString += " "
+        if (expected)
+            patchedString += `(+)(${expected})`
+        return patchedString
+    }
 ) {
     const diffWorkBook: DiffWorkBook<T> = new DiffWorkBook()
     const actualSheets = actualWorkBook.SheetNames
@@ -75,18 +86,21 @@ export function diffWorkBook<T>(
     const maxSheetCount = Math.max(actualSheets?.length || 0, expectedSheets?.length || 0)
     for (let i = 0; i < maxSheetCount; i += 1) {
         if (comparator(actualSheets?.[i] as T, expectedSheets?.[i] as T)) {
-            diffWorkBook.sheets[actualSheets?.[i]] = diff<T>(
+            const actualPatchedSheet = sheetPatcher(actualSheets?.[i],null)
+            diffWorkBook.sheets[actualPatchedSheet] = diff<T>(
                 utils.sheet_to_json(actualWorkBook.Sheets[actualSheets?.[i]], { header: 1 }),
                 [],
                 comparator
             )
-            diffWorkBook.diffCount += diffWorkBook.sheets[actualSheets?.[i]].diffCount
-            diffWorkBook.sheets[expectedSheets?.[i]] = diff<T>(
+            diffWorkBook.diffCount += diffWorkBook.sheets[actualPatchedSheet].diffCount
+            const expectedPatchedSheet = sheetPatcher(null,expectedSheets?.[i])
+            console.log({actualPatchedSheet,expectedPatchedSheet})
+            diffWorkBook.sheets[expectedPatchedSheet] = diff<T>(
                 [],
                 utils.sheet_to_json(expectedWorkBook.Sheets[expectedSheets?.[i]], { header: 1 }),
                 comparator
             )
-            diffWorkBook.diffCount += diffWorkBook.sheets[expectedSheets?.[i]].diffCount
+            diffWorkBook.diffCount += diffWorkBook.sheets[expectedPatchedSheet].diffCount
         }
         else {
             diffWorkBook.sheets[expectedSheets[i]] = diff<T>(
