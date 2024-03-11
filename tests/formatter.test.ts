@@ -69,11 +69,6 @@ test('Error default formatter', () => {
     const expectedAOA = readCSV<string>(expectedFilePath)
     const diffAOA = diff<string>(actualAOA, expectedAOA)
     const formatError = () => diffAOA.format(new Formatter<string>())
-    // const csv = diffAOA.format(new Formatter<string>())
-    // fs.mkdirSync("tests/delta", { recursive: true })
-    // fs.writeFileSync("tests/delta/diff-financial-data.csv", csv)
-    // const actualFileChecksum = crypto.createHash('sha256').update(fs.readFileSync('tests/delta/diff-financial-data.csv')).digest('hex');
 
-    // expect(actualFileChecksum).toEqual(testData.expectedCSVFileChecksum);
     expect(formatError).toThrow("Method not implemented.");
 })
