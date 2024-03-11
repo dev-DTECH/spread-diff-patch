@@ -1,4 +1,4 @@
-import DiffAOA from "./DIffAOA";
+import DiffAOA from "./DiffAOA";
 import { WorkbookFormatter } from "./formatter/workbook";
 /**
  * Represents a workbook that stores the differences between two workbooks.

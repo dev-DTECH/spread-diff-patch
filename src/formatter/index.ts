@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
+import DiffAOA from "../DiffAOA"
+
 /**
  * Represents a Formatter class.
  * @template T - The type parameter for the Formatter class.
@@ -28,10 +30,10 @@ export default class Formatter<T> {
 
     /**
      * Formats the diff array of arrays.
-     * @param {T[][]} diffAOA - The diff array of arrays to be formatted.
-     * @returns {string} The formatted string.
+     * @param diffAOA - The diff array of arrays to be formatted.
+     * @returns The formatted string.
      */
-    format(diffAOA: T[][]): string {
+    format(diffAOA: DiffAOA<T>): string {
         throw new Error("Method not implemented.");
     }
 }

@@ -13,7 +13,7 @@ class DiffAOA<T> extends Array<Array<T | Array<T | null>>> {
      * @returns The formatted string representing the differences.
      */
     format(formatter: Formatter<T>): string {
-        return formatter.format(this as T[][]);
+        return formatter.format(this as DiffAOA<T>);
     }
 
     /**

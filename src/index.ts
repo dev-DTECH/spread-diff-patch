@@ -1,6 +1,6 @@
 import Papa from "papaparse";
 import fs from 'fs';
-import DiffAOA from "./DIffAOA";
+import DiffAOA from "./DiffAOA";
 import xlsx, { WorkBook, utils } from 'xlsx';
 import DiffWorkBook from "./DiffWorkBook";
 
@@ -73,8 +73,6 @@ export function diffWorkBook<T>(
         let patchedString = ""
         if (actual)
             patchedString += `(-)(${actual})`
-        if (actual && expected)
-            patchedString += " "
         if (expected)
             patchedString += `(+)(${expected})`
         return patchedString
