@@ -1,5 +1,10 @@
 # spread-diff-patch
 
+<!--- badges -->
+
+<!-- [![Build Status](https://secure.travis-ci.org/benjamine/jsondiffpatch.svg)](http://travis-ci.org/benjamine/jsondiffpatch) -->
+[![Build Status](https://github.com/dev-DTECH/spread-diff-patch/actions/workflows/node.js.yml/badge.svg)](https://github.com/dev-DTECH/spread-diff-patch/actions/workflows/node.js.yml)
+
 ## Overview
 
 `spread-diff-patch` is a powerful npm package designed to simplify the process of differencing and patching spreadsheet files. It offers comprehensive functionality for comparing various spreadsheet formats, such as CSV and Workbooks (e.g., Excel files), and generating detailed patch files to highlight the differences between them.
