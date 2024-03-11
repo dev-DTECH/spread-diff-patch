@@ -5,7 +5,7 @@ import escapeHTML from "escape-html"
 import DiffAOA from "../DiffAOA"
 import path from "path"
 
-export default class HTML extends Formatter<string> {
+export class HTML extends Formatter<string> {
     constructor(
         patcher = (actual: string | null, expected: string | null) => {
             let patchedString = ""
@@ -22,7 +22,7 @@ export default class HTML extends Formatter<string> {
         this.patch = patcher
     }
     format(diffAOA: DiffAOA<string>): string {
-        const script = fs.readFileSync("./src/formatter/script.js", "utf8");
+        const script = fs.readFileSync(path.resolve(__dirname, "./script.js"), "utf8");
         const patchedAOA = diffAOA.map((row) => {
             return row.map((cell) => {
                 if (Array.isArray(cell)) {

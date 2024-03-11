@@ -5,7 +5,7 @@ import { CSV } from '../src/formatter/csv';
 import { WorkbookFormatter } from '../src/formatter/workbook';
 import { writeFile } from 'xlsx';
 import testData from './data/test.data.json';
-import HTML from '../src/formatter/html';
+import { HTML } from '../src/formatter/html';
 import Formatter from '../src/formatter';
 
 test('Write delta CSV', () => {
