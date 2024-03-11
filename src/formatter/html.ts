@@ -3,6 +3,7 @@ import Formatter from "."
 import fs from "fs"
 import escapeHTML from "escape-html"
 import DiffAOA from "../DiffAOA"
+import path from "path"
 
 export default class HTML extends Formatter<string> {
     constructor(
@@ -21,7 +22,7 @@ export default class HTML extends Formatter<string> {
         this.patch = patcher
     }
     format(diffAOA: DiffAOA<string>): string {
-        const script = fs.readFileSync("C:/Users/KIIT/Documents/git/spread-diff-patch/src/formatter/script.js", "utf8");
+        const script = fs.readFileSync("./src/formatter/script.js", "utf8");
         const patchedAOA = diffAOA.map((row) => {
             return row.map((cell) => {
                 if (Array.isArray(cell)) {
