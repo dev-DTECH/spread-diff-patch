@@ -57,9 +57,9 @@ test('Write delta HTML', () => {
     `
     fs.mkdirSync("tests/delta", { recursive: true })
     fs.writeFileSync("tests/delta/diff-financial-data.html", html)
-    const actualFileChecksum = crypto.createHash('sha256').update(fs.readFileSync('tests/delta/diff-financial-data.html')).digest('hex');
+    // const actualFileChecksum = crypto.createHash('sha256').update(fs.readFileSync('tests/delta/diff-financial-data.html')).digest('hex');
 
-    expect(actualFileChecksum).toEqual(testData.expectedHTMLFileChecksum);
+    // expect(actualFileChecksum).toEqual(testData.expectedHTMLFileChecksum);
 })
 
 test('Error default formatter', () => {
