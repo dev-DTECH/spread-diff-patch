@@ -2,7 +2,7 @@
 import Formatter from "."
 import fs from "fs"
 import escapeHTML from "escape-html"
-import DiffAOA from "../DeltaAOA"
+import DiffAOA from "../DiffAOA"
 
 export default class HTML extends Formatter<string> {
     constructor(
