@@ -1,40 +1,50 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import Formatter from "."
-type DiffAOA = (string | (string | null)[])[][]
-type DiffCellAOA=(string|null)
+import fs from "fs"
+import escapeHTML from "escape-html"
+import DiffAOA from "../DiffAOA"
 
 export default class HTML extends Formatter<string> {
-    format(diffAOA: DiffAOA): string {
-        let baseHTMLContent:string=`<table style="border-collapse: collapse;" class="diff-of-data">`;
-        diffAOA.forEach((row)=>{
-            baseHTMLContent+=`<tr>`
-            row.forEach((cell)=>{
-                if(typeof cell===`string`){
-                    baseHTMLContent+=`<td style="border: 1px solid black; padding: 8px;" class="no-diff-string"><p style="background:#d0dfff;">${cell}</p></td>`
-                }else{
-                    baseHTMLContent+=this.patchFormat(cell[0],cell[1])
-                }
-            
-            })
-            baseHTMLContent+=`</tr>`
-        })
-        baseHTMLContent+=`</table>`
-        return baseHTMLContent
-        // // TODO: Implement HTML formatting
-        // throw new Error("Method not implemented.");
+    constructor(
+        patcher = (actual: string | null, expected: string | null) => {
+            let patchedString = ""
+            if (actual)
+                patchedString += `<span style="background:#ffbbbb;"><s>${actual}</s></span>`
+            if (actual && expected)
+                patchedString += " "
+            if (expected)
+                patchedString += `<span style="background:#bbffbb;">${expected}</span>`
+            return patchedString
+        }
+    ) {
+        super(patcher)
+        this.patch = patcher
     }
-
-    patchFormat(actual:DiffCellAOA,expected:DiffCellAOA):string{
-      
-            if(actual&&expected){
-                return `<td style="border: 1px solid black; padding: 8px;"><div class="actual-expected-diff" style="display: flex; flex-direction: row;"><p class="actual-data" style="margin-right:5px; background:#ffbbbb;"><s>${actual}</s></p><p class="expected-data" style="background:#bbffbb;">${expected}</p></div></td>`
-            }else if(expected){
-                return `<td style="border: 1px solid black; padding: 8px;"><p class="no-actual-but-expected" style="background:#bbffbb;">${expected}</p></td>`
-            }else if(actual) {
-                return `<td style="border: 1px solid black; padding: 8px;"><p class="no-expected-but-actual" style="background:#ffbbbb;"><s>${actual}</s></p></td>`
-            }else{
-                return `<td style="border: 1px solid black; padding: 8px;"></td>`;
+    format(diffAOA: DiffAOA<string>): string {
+        const script = fs.readFileSync("C:/Users/KIIT/Documents/git/spread-diff-patch/src/formatter/script.js", "utf8");
+        const patchedAOA = diffAOA.map((row) => {
+            return row.map((cell) => {
+                if (Array.isArray(cell)) {
+                    return this.patch(cell[0], cell[1])
+                }
+                return cell;
+            });
+        })
+        return `
+        <div id="spread-diff-patch">
+            <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
             }
-        
+            </style>
+            <div id="spread-diff-patch-data" data-raw-diffAOA='${escapeHTML(JSON.stringify(patchedAOA))}'></div>
+            <script src="https://unpkg.com/canvas-datagrid"></script>
+            <script>
+                ${script}
+            </script>
+        </div>
+        `
     }
 }

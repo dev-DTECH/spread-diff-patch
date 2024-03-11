@@ -1,6 +1,7 @@
 {
     "expectedCSVFileChecksum": "d328b109a3f0d6cf05f1b308f4d18cc6f165d7d248dffc1d4345d1595dd6a114",
     "expectedXLSXFileChecksum": "36e9c3732d89c59a3b9b832668155c8425a99b18fb2464130d43774f2e705d98",
+    "expectedHTMLFileChecksum": "2eeb8eeea77009e8a6d00a35cf06fbf897f4c2227ad31f3b8cf3d805ee87027e",
     "diffCountWB": 127,
     "diffCountAOA": 21876
 }
