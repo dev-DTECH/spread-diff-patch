@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
-import DiffAOA from "../DiffAOA"
+import DiffAOA from "../DeltaAOA"
 
 /**
  * Represents a Formatter class.

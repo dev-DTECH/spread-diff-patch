@@ -1,5 +1,5 @@
 import { WorkBook, utils } from "xlsx";
-import DiffAOA from "../DiffAOA";
+import DiffAOA from "../DeltaAOA";
 
 /**
  * Represents a formatter for a workbook.
