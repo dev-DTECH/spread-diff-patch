@@ -3,8 +3,10 @@
 
 <!--- badges -->
 
-<!-- [![Build Status](https://secure.travis-ci.org/benjamine/jsondiffpatch.svg)](http://travis-ci.org/benjamine/jsondiffpatch) -->
+![NPM Version](https://img.shields.io/npm/v/spread-diff-patch)
+![NPM Downloads](https://img.shields.io/npm/dm/spread-diff-patch)
 [![Build Status](https://github.com/dev-DTECH/spread-diff-patch/actions/workflows/node.js.yml/badge.svg)](https://github.com/dev-DTECH/spread-diff-patch/actions/workflows/node.js.yml)
+<!-- [![spread-diff-patch](https://snyk.io//advisor/npm-package/spread-diff-patch/badge.svg)](/advisor/npm-package/spread-diff-patch) -->
 
 ## Overview
 
